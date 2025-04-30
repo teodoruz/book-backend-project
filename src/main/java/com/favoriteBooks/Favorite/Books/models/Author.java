@@ -2,24 +2,25 @@ package com.favoriteBooks.Favorite.Books.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.List;
 
-//pascal case
+
 @Entity
 public class Author {
-    //camel case
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idauthor")
+    @Id
     private Long id;
+    @NotBlank
     private String name;
+    @NotBlank
     private String biography;
     @OneToMany
     @JsonIgnore
     @JoinColumn(name = "Books")
     private List<Book> books;
-
 
 
     public Long getId() {
