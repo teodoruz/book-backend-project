@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(path = "/author")
 public class AuthorController {
@@ -21,4 +23,15 @@ public class AuthorController {
     public ResponseEntity<Author> postAuthor(@RequestBody AuthorDto authordto) throws Exception {
         return ResponseEntity.status(HttpStatus.CREATED).body(authorService.insertAuthor(authordto));
     }
+
+    @GetMapping
+    public ResponseEntity<List<Author>> getAllAuthors() {
+        return authorService.getAllAuthors();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Author> getById(@PathVariable Long id) {
+        return authorService.getById(id);
+    }
+    
 }

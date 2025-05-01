@@ -1,21 +1,25 @@
 package com.favoriteBooks.Favorite.Books.models;
 
+import com.favoriteBooks.Favorite.Books.models.enums.BookRating;
 import jakarta.persistence.*;
 
 @Entity
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="idbook")
+    @Column(name = "idbook")
     private Long id;
     private String title;
     @ManyToOne
     @JoinColumn(name = "author_id")
     private Author author;
+    @Enumerated
+    private BookRating bookRating;
 
-    public Book(){}
+    public Book() {
+    }
 
-    public Book(Long id, String title, Author author){
+    public Book(Long id, String title, Author author) {
         this.id = id;
         this.title = title;
         this.author = author;
