@@ -2,6 +2,8 @@ package com.favoriteBooks.Favorite.Books.models;
 
 import com.favoriteBooks.Favorite.Books.models.enums.BookRating;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 public class Book {
@@ -47,5 +49,13 @@ public class Book {
 
     public void setAuthor(Author author) {
         this.author = author;
+    }
+
+    public BookRating getBookRating() {
+        return bookRating;
+    }
+
+    public void setBookRating(BookRating bookRating) {
+        this.bookRating = bookRating;
     }
 }

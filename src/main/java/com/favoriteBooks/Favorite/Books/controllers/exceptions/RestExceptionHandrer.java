@@ -4,7 +4,6 @@ import com.favoriteBooks.Favorite.Books.services.authorException.AuthorAlreadyEx
 import com.favoriteBooks.Favorite.Books.services.authorException.AuthorListEmpty;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolationException;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
