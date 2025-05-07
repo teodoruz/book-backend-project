@@ -1,6 +1,7 @@
 package com.favoriteBooks.Favorite.Books.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,8 +21,9 @@ public class User {
     @Column(name = "iduser")
     private Long id;
     private String name;
-    private String email;
     private String password;
     @OneToMany(mappedBy = "user")
     private List<UserBook> userBooks;
+    @NotNull
+    private String role;
 }

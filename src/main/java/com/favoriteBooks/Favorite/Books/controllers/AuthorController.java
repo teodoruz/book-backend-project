@@ -3,7 +3,6 @@ package com.favoriteBooks.Favorite.Books.controllers;
 import com.favoriteBooks.Favorite.Books.models.Author;
 import com.favoriteBooks.Favorite.Books.models.dtos.AuthorDto;
 import com.favoriteBooks.Favorite.Books.services.AuthorService;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,8 +29,14 @@ public class AuthorController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Author> getById(@PathVariable Long id) {
+    public Author getById(@PathVariable Long id) {
         return authorService.getById(id);
     }
-    
+
+    @DeleteMapping("{id}")
+    public void deleteAuthorById(@PathVariable Long id) {
+        authorService.deleteAuthor(id);
+    }
+
+
 }

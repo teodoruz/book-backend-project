@@ -1,7 +1,11 @@
 package com.favoriteBooks.Favorite.Books.controllers.exceptions;
 
+import com.favoriteBooks.Favorite.Books.models.Book;
+import com.favoriteBooks.Favorite.Books.models.enums.BookRating;
 import com.favoriteBooks.Favorite.Books.services.authorException.AuthorAlreadyExists;
 import com.favoriteBooks.Favorite.Books.services.authorException.AuthorListEmpty;
+import com.favoriteBooks.Favorite.Books.services.authorException.AuthorNotFind;
+import com.favoriteBooks.Favorite.Books.services.bookException.BookNotExist;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
@@ -44,6 +48,14 @@ public class RestExceptionHandrer extends ResponseEntityExceptionHandler {
         HttpStatus status = HttpStatus.NOT_FOUND;
         String error = "Autor não encontrado";
         StandardError standardError = new StandardError(Instant.now().toString(), status.toString(), error, a.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(status).body(standardError);
+    }
+
+    @ExceptionHandler(BookNotExist.class)
+    public ResponseEntity<StandardError> bookNotExist(BookNotExist b, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        String error = "este livro não existe";
+        StandardError standardError = new StandardError(Instant.now().toString(), error, status.toString(), b.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(standardError);
     }
 }

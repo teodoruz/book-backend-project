@@ -19,7 +19,6 @@ public class Author {
     private String biography;
     @OneToMany
     @JsonIgnore
-    @JoinColumn(name = "Books")
     private List<Book> books;
 
 

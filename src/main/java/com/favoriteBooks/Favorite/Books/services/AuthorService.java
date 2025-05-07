@@ -1,16 +1,15 @@
 package com.favoriteBooks.Favorite.Books.services;
 
 import com.favoriteBooks.Favorite.Books.Repository.AuthorRepository;
-import com.favoriteBooks.Favorite.Books.controllers.exceptions.AuthorNotFind;
+import com.favoriteBooks.Favorite.Books.services.authorException.AuthorNotFind;
 import com.favoriteBooks.Favorite.Books.models.Author;
 import com.favoriteBooks.Favorite.Books.models.dtos.AuthorDto;
 import com.favoriteBooks.Favorite.Books.services.authorException.AuthorAlreadyExists;
 import com.favoriteBooks.Favorite.Books.services.authorException.AuthorListEmpty;
-import org.hibernate.usertype.internal.AbstractTimeZoneStorageCompositeUserType;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
@@ -40,9 +39,17 @@ public class AuthorService {
         return ResponseEntity.status(HttpStatus.OK).body(authorList);
     }
 
-    public ResponseEntity<Author> getById(Long id) {
+    public Author getById(Long id) {
         Author author = authorRepository.findById(id).orElseThrow(() -> new AuthorNotFind("Autor com o id: " + id + " Não encontrado"));
-        return ResponseEntity.status(HttpStatus.OK).body(author);
+        return author;
+    }
+
+    public void deleteAuthor(@PathVariable Long id) {
+        if (authorRepository.existsById(id)) {
+            authorRepository.deleteById(id);
+        } else {
+            throw new AuthorNotFind("autor com id " + " não encontrado");
+        }
     }
 
     public void toDto(AuthorDto authorDto, Author author) {
