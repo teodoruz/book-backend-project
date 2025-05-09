@@ -1,7 +1,6 @@
 package com.favoriteBooks.Favorite.Books.services;
 
 import com.favoriteBooks.Favorite.Books.Repository.UserRepository;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -20,6 +19,7 @@ public class AuthorizationService implements UserDetailsService {
     //buscando user pelo login(username)
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
+        return userRepository.findByLogin(username);
+
     }
 }

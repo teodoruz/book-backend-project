@@ -3,10 +3,7 @@ package com.favoriteBooks.Favorite.Books.models;
 import com.favoriteBooks.Favorite.Books.models.enums.UserRoles;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,22 +12,30 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Table(name = "users")
+@Data
+@Table(name = "user")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "iduser")
-    private String id;
+    private Long id;
     private String login;
     private String password;
     @OneToMany(mappedBy = "user")
     private List<UserBook> userBooks;
     @NotNull
     private UserRoles role;
+
+
+    public User(String login, String password, UserRoles role) {
+        this.login = login;
+        this.password = password;
+        this.role = role;
+    }
+
+    public User() {
+        
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -65,11 +70,11 @@ public class User implements UserDetails {
         return UserDetails.super.isEnabled();
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
