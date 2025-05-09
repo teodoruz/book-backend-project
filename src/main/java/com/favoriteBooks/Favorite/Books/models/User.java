@@ -24,6 +24,7 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user")
     private List<UserBook> userBooks;
     @NotNull
+    //tipos de permissao do usuario (ADMIN, USER..ETC)
     private UserRoles role;
 
 
@@ -34,10 +35,11 @@ public class User implements UserDetails {
     }
 
     public User() {
-        
+
     }
 
     @Override
+    //indicando para o spring que a role ADMIN recebe autorização de admi
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (this.role == UserRoles.ADMIN) {
             return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
