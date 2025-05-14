@@ -1,8 +1,10 @@
 package com.favoriteBooks.Favorite.Books.controllers;
 
 import com.favoriteBooks.Favorite.Books.Repository.UserRepository;
+import com.favoriteBooks.Favorite.Books.infra.security.TokenService;
 import com.favoriteBooks.Favorite.Books.models.User;
 import com.favoriteBooks.Favorite.Books.models.dtos.AuthenticationDto;
+import com.favoriteBooks.Favorite.Books.models.dtos.LoginResponseDto;
 import com.favoriteBooks.Favorite.Books.models.dtos.RegisterDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +22,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthenticationController {
 
     private final AuthenticationManager authenticationManager;
-
+    private final TokenService tokenService;
     private final UserRepository userRepository;
 
-    public AuthenticationController(AuthenticationManager authenticationManager, UserRepository userRepository) {
+    public AuthenticationController(AuthenticationManager authenticationManager, UserRepository userRepository, TokenService tokenService) {
         this.authenticationManager = authenticationManager;
         this.userRepository = userRepository;
+        this.tokenService = tokenService;
     }
 
 
@@ -35,7 +38,9 @@ public class AuthenticationController {
         var usernamepassword = new UsernamePasswordAuthenticationToken(dto.login(), dto.password());
         //comparando o token gerado com as crecenciais salvas no banco de dados
         var auth = this.authenticationManager.authenticate(usernamepassword);
-        return ResponseEntity.ok().build();
+        var token = tokenService.generateToken((User) auth.getPrincipal());
+
+        return ResponseEntity.ok(new LoginResponseDto(token));
     }
 
     @PostMapping("/register")
