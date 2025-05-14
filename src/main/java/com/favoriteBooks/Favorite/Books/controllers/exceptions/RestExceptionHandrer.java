@@ -22,7 +22,7 @@ public class RestExceptionHandrer extends ResponseEntityExceptionHandler {
     @ExceptionHandler(AuthorAlreadyExists.class)
     public ResponseEntity<StandardError> authorAlreadyExistsResponseEntity(AuthorAlreadyExists a, HttpServletRequest request) {
         HttpStatus status = HttpStatus.MULTIPLE_CHOICES;
-        String error = "User already exists";
+        String error = "Usuario ja existe no banco de dados";
         StandardError standardError = new StandardError(Instant.now().toString(), error, a.getMessage(), request.getRequestURI(), status.toString());
         return ResponseEntity.status(status).body(standardError);
     }
