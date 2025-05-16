@@ -39,7 +39,7 @@ public class User implements UserDetails {
     }
 
     @Override
-    //indicando para o spring que a role ADMIN recebe autorização de admi
+    //indicando para o spring que a role ADMIN recebe autorização de admin
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (this.role == UserRoles.ADMIN) {
             return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));

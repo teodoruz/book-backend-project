@@ -36,10 +36,11 @@ public class AuthenticationController {
     public ResponseEntity login(@RequestBody @Valid AuthenticationDto dto) {
         //criando um token a partir do login e da senha fornecidas pelo usuario
         var usernamepassword = new UsernamePasswordAuthenticationToken(dto.login(), dto.password());
-        //comparando o token gerado com as crecenciais salvas no banco de dados
+        //comparando o token gerado com as crecenciais salvas no banco de dados, e armazenando as informaçoes em uma var
         var auth = this.authenticationManager.authenticate(usernamepassword);
+        //usa o tokenService para gerar um token com base nas informaçoes capturadas por auth.getPrincipal()
         var token = tokenService.generateToken((User) auth.getPrincipal());
-
+        //retornando o token para autorizar requisiçoes
         return ResponseEntity.ok(new LoginResponseDto(token));
     }
 
