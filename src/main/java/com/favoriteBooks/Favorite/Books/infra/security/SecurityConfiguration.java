@@ -37,6 +37,10 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
                         .requestMatchers(HttpMethod.POST, "/author").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/userbook").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/book").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/book").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/author").authenticated()
                         //indicando que qualquer outra requisição precisa estar autenticada para acessar
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

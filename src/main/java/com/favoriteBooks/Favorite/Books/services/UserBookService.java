@@ -17,14 +17,14 @@ public class UserBookService {
         this.userBookRepository = userBookRepository;
     }
 
-    public ResponseEntity<UserBook> createUserBook(@RequestBody UserBookDTO userBookDTO){
+    public UserBook createUserBook(@RequestBody UserBookDTO userBookDTO){
         var user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserBook userBook = new UserBook();
         userBook.setBook(userBookDTO.book());
         userBook.setUser(user);
         userBook.setId(userBookDTO.id());
         userBook.setBookRating(userBook.getBookRating());
-        UserBook userBook1 = userBookRepository.save(userBook);
-        return ResponseEntity.ok().body(userBook1);
+        return userBookRepository.save(userBook);
+
     }
 }

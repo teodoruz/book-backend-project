@@ -10,10 +10,6 @@ import lombok.Setter;
 import java.util.UUID;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class UserBook {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,4 +23,45 @@ public class UserBook {
     private User user;
     private BookRating bookRating;
 
+    public UserBook() {
+    }
+
+    public UserBook(Long id, Book book, User user, BookRating bookRating) {
+        this.id = id;
+        this.book = book;
+        this.user = user;
+        this.bookRating = bookRating;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public BookRating getBookRating() {
+        return bookRating;
+    }
+
+    public void setBookRating(BookRating bookRating) {
+        this.bookRating = bookRating;
+    }
 }

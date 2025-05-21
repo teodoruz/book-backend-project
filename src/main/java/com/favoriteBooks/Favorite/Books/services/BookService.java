@@ -5,8 +5,11 @@ import com.favoriteBooks.Favorite.Books.models.Author;
 import com.favoriteBooks.Favorite.Books.models.Book;
 import com.favoriteBooks.Favorite.Books.models.dtos.BookDto;
 import com.favoriteBooks.Favorite.Books.services.bookException.BookNotExist;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.List;
 
 
 @Service
@@ -42,5 +45,10 @@ public class BookService {
         book.setTitle(bookDto.getTitle());
         book.setAuthor(bookDto.getAuthor());
         book.setBookRating(bookDto.getBookRating());
+    }
+
+    public List<Book> findAllBooks(){
+        List<Book> books = bookRepository.findAll();
+        return books;
     }
 }
