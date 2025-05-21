@@ -9,6 +9,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
+
 @Service
 public class UserBookService {
     private final UserBookRepository userBookRepository;
@@ -25,6 +27,13 @@ public class UserBookService {
         userBook.setId(userBookDTO.id());
         userBook.setBookRating(userBook.getBookRating());
         return userBookRepository.save(userBook);
+    }
 
+    public List<UserBook> findAllUserBooks(){
+        List<UserBook> userBookList = userBookRepository.findAll();
+        return userBookList;
+    }
+    public void deleteUserBookById(Long id){
+        userBookRepository.deleteById(id);
     }
 }
