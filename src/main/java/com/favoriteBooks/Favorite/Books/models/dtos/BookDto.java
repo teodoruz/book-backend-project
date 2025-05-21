@@ -8,7 +8,7 @@ import lombok.Data;
 public class BookDto {
     private Long id;
     private String title;
-    private Author author;
+    private Long authorid;
     private BookRating bookRating;
 
     public Long getId() {
@@ -26,20 +26,19 @@ public class BookDto {
     public void setTitle(String title) {
         this.title = title;
     }
-
-    public Author getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(Author author) {
-        this.author = author;
-    }
-
     public BookRating getBookRating() {
         return bookRating;
     }
 
     public void setBookRating(BookRating bookRating) {
         this.bookRating = bookRating;
+    }
+
+    public Long getAuthorid() {
+        return authorid;
+    }
+
+    public void setAuthorid(Long authorid) {
+        this.authorid = authorid;
     }
 }

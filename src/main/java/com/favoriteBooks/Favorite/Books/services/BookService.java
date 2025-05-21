@@ -24,7 +24,7 @@ public class BookService {
 
     public Book postBook(@RequestBody BookDto bookDto) {
         Book book = new Book();
-        Author author = authorService.getById(bookDto.getAuthor().getId());
+        Author author = authorService.getById(bookDto.getAuthorid());
         book.setId(bookDto.getId());
         book.setTitle(bookDto.getTitle());
         book.setAuthor(author);
@@ -43,7 +43,6 @@ public class BookService {
     public void toDto(BookDto bookDto, Book book) {
         book.setId(bookDto.getId());
         book.setTitle(bookDto.getTitle());
-        book.setAuthor(bookDto.getAuthor());
         book.setBookRating(bookDto.getBookRating());
     }
 
