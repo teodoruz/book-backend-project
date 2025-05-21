@@ -1,6 +1,7 @@
 package com.favoriteBooks.Favorite.Books.controllers;
 
 import com.favoriteBooks.Favorite.Books.models.Author;
+import com.favoriteBooks.Favorite.Books.models.Book;
 import com.favoriteBooks.Favorite.Books.models.dtos.AuthorDto;
 import com.favoriteBooks.Favorite.Books.services.AuthorService;
 import org.springframework.http.HttpStatus;
@@ -36,6 +37,11 @@ public class AuthorController {
     @DeleteMapping("{id}")
     public void deleteAuthorById(@PathVariable Long id) {
         authorService.deleteAuthor(id);
+    }
+    @GetMapping("/{id}/books")
+    public ResponseEntity<List<Book>> findAllBooksFromAuthorId(@PathVariable Long id){
+        List<Book> books = authorService.findAllBooksFromAuthorId(id);
+        return ResponseEntity.ok().body(books);
     }
 
 

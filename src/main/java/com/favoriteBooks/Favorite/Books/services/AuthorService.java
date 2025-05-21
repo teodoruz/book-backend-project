@@ -1,6 +1,8 @@
 package com.favoriteBooks.Favorite.Books.services;
 
 import com.favoriteBooks.Favorite.Books.Repository.AuthorRepository;
+import com.favoriteBooks.Favorite.Books.Repository.BookRepository;
+import com.favoriteBooks.Favorite.Books.models.Book;
 import com.favoriteBooks.Favorite.Books.services.authorException.AuthorNotFind;
 import com.favoriteBooks.Favorite.Books.models.Author;
 import com.favoriteBooks.Favorite.Books.models.dtos.AuthorDto;
@@ -9,6 +11,7 @@ import com.favoriteBooks.Favorite.Books.services.authorException.AuthorListEmpty
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -17,9 +20,11 @@ import java.util.List;
 @Service
 public class AuthorService {
     private final AuthorRepository authorRepository;
+    private final BookRepository bookRepository;
 
-    public AuthorService(AuthorRepository authorRepository) {
+    public AuthorService(AuthorRepository authorRepository, BookRepository bookRepository) {
         this.authorRepository = authorRepository;
+        this.bookRepository = bookRepository;
     }
 
     public Author insertAuthor(@RequestBody AuthorDto author) {
@@ -55,6 +60,11 @@ public class AuthorService {
     public void toDto(AuthorDto authorDto, Author author) {
         author.setName(authorDto.getName());
         author.setBiography(authorDto.getBiography());
+    }
+
+    public List<Book> findAllBooksFromAuthorId(Long id){
+        List<Book> books = bookRepository.findByAuthor_Id(id);
+        return books;
     }
 
 
