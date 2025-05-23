@@ -1,5 +1,6 @@
 package com.favoriteBooks.Favorite.Books.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.favoriteBooks.Favorite.Books.models.enums.BookRating;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -20,7 +21,9 @@ public class UserBook {
     private Book book;
     @ManyToOne
     @JoinColumn(name = "iduser")
+    @JsonBackReference
     private User user;
+    @Enumerated(EnumType.STRING)
     private BookRating bookRating;
 
     public UserBook() {

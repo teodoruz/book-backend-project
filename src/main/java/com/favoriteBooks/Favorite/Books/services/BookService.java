@@ -28,7 +28,6 @@ public class BookService {
         book.setId(bookDto.getId());
         book.setTitle(bookDto.getTitle());
         book.setAuthor(author);
-        book.setBookRating(bookDto.getBookRating());
         return bookRepository.save(book);
     }
 
@@ -43,11 +42,16 @@ public class BookService {
     public void toDto(BookDto bookDto, Book book) {
         book.setId(bookDto.getId());
         book.setTitle(bookDto.getTitle());
-        book.setBookRating(bookDto.getBookRating());
+
     }
 
     public List<Book> findAllBooks(){
         List<Book> books = bookRepository.findAll();
         return books;
+    }
+
+    public Book findBookById(Long id){
+        Book book = bookRepository.findById(id).orElseThrow(() -> new RuntimeException("o livro de id: " + id +" não existe"));
+        return book;
     }
 }

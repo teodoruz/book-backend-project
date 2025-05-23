@@ -13,8 +13,7 @@ public class Book {
     @ManyToOne
     @JoinColumn(name = "author_id")
     private Author author;
-    @Enumerated(EnumType.STRING)
-    private BookRating bookRating;
+
 
     public Book() {
     }
@@ -49,11 +48,5 @@ public class Book {
         this.author = author;
     }
 
-    public BookRating getBookRating() {
-        return bookRating;
-    }
 
-    public void setBookRating(BookRating bookRating) {
-        this.bookRating = bookRating;
-    }
 }

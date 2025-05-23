@@ -43,6 +43,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.GET, "/author").authenticated()
                         .requestMatchers(HttpMethod.DELETE, "/userbook").authenticated()
                         .requestMatchers(HttpMethod.GET, "/author/{id}/books").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/userbook").authenticated()
                         //indicando que qualquer outra requisição precisa estar autenticada para acessar
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

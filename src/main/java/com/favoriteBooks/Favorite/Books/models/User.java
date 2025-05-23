@@ -1,5 +1,6 @@
 package com.favoriteBooks.Favorite.Books.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.favoriteBooks.Favorite.Books.models.enums.UserRoles;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -21,7 +22,8 @@ public class User implements UserDetails {
     private Long id;
     private String login;
     private String password;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @JsonManagedReference
     private List<UserBook> userBooks;
     @NotNull
     //tipos de permissao do usuario (ADMIN, USER..ETC)

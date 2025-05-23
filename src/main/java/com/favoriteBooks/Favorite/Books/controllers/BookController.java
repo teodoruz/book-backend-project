@@ -3,6 +3,7 @@ package com.favoriteBooks.Favorite.Books.controllers;
 import com.favoriteBooks.Favorite.Books.models.Book;
 import com.favoriteBooks.Favorite.Books.models.dtos.BookDto;
 import com.favoriteBooks.Favorite.Books.services.BookService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +32,11 @@ public class BookController {
     public ResponseEntity<List<Book>> findAllBooks(){
         List<Book> books =bookService.findAllBooks();
         return ResponseEntity.ok().body(books);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<Book> findBookById(@PathVariable Long id){
+        Book book = bookService.findBookById(id);
+        return ResponseEntity.ok().body(book);
     }
 
 
