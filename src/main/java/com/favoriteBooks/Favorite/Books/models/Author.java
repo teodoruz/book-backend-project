@@ -21,6 +21,16 @@ public class Author {
     @JsonIgnore
     private List<Book> books;
 
+    public Author(Long id, String name, String biography, List<Book> books) {
+        this.id = id;
+        this.name = name;
+        this.biography = biography;
+        this.books = books;
+    }
+
+    public Author() {
+
+    }
 
     public Long getId() {
         return id;
